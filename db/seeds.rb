@@ -1,5 +1,4 @@
 Incident.destroy_all
-
 INCIDENT_TYPE = ['Injury', 'Near miss', 'Property damage']
 DEPARTMENTS = ["American Ethnic Studies", "American Indian Studies", "Anthropology", "Applied Mathematics",
     "Art, Art History & Design", "Asian Languages & Literature", "Astronomy", "Biology", "Chemistry", "Classics",
@@ -24,6 +23,7 @@ random_property_damage = [true, false]
         )
 end
 
+Injury.destroy_all
 INJURY_TYPE = ['Abrasions', 'Lacerations', 'Foreign body in eye', 'Contusions',
     'Burns', 'Fractures', 'Amputation', 'Metal fume fever', 'Hearing loss', 'Sprain',
     'Strain', 'Heat stress or heat related illness', 'Frostbite or cold related injury',
@@ -31,9 +31,10 @@ INJURY_TYPE = ['Abrasions', 'Lacerations', 'Foreign body in eye', 'Contusions',
     'Allergy, sensitivity reaction']
 BODY_PART = ["Toe(s)", "Ankle", "Foot", "Leg", "Hip", "Abdomen", "Chest", "Back", "Neck",
             "Face", "Eye", "Ear", "Mouth", "Nose", "Shoulder", "Arm", "Wrist", "Hand", "Finger"]
-Injury.destroy_all
+
 10.times do
     Injury.create(
+        incident_id: incident.injury.ids,
         affected_body_part: BODY_PART.sample,
         type_of_injury: INJURY_TYPE.sample,
         treatment: Faker::Lorem.words

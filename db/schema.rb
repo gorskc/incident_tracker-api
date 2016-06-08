@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20160605044413) do
     t.datetime "updated_at",            null: false
   end
 
-  create_table "employees_incidents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "employees_id"
-    t.integer "incidents_id"
-    t.index ["employees_id"], name: "index_employees_incidents_on_employees_id", using: :btree
-    t.index ["incidents_id"], name: "index_employees_incidents_on_incidents_id", using: :btree
+  create_table "employees_incidents", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "employee_id"
+    t.integer "incident_id"
+    t.index ["employee_id"], name: "index_employees_incidents_on_employee_id", using: :btree
+    t.index ["incident_id"], name: "index_employees_incidents_on_incident_id", using: :btree
   end
 
   create_table "incidents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(version: 20160605044413) do
   end
 
   create_table "injuries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "incident_id"
     t.string   "affected_body_part"
     t.string   "type_of_injury"
     t.string   "treatment"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["incident_id"], name: "index_injuries_on_incident_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

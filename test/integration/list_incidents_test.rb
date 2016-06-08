@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ListIncidentsTest < ActionDispatch::IntegrationTest
   test 'listing incidents without content' do
-    get '#/incidents'
+    get '/incidents'
 
     assert_equal 200, response.status
     assert_equal Mime[:json], response.content_type
@@ -14,7 +14,7 @@ class ListIncidentsTest < ActionDispatch::IntegrationTest
                      date_reported: '2016-02-02',
                      location_of_incident: 'Location1',
                      type_of_incident: 'Incident1',
-                     property_damage: True,
+                     property_damage: 'True',
                      description_of_damage: 'Damage',
                      suggested_corrective_action: 'Action1')
     Incident.create!(description: 'Injury2',
@@ -25,9 +25,10 @@ class ListIncidentsTest < ActionDispatch::IntegrationTest
                      property_damage: 'True',
                      description_of_damage: 'Lots of damage',
                      suggested_corrective_action: 'Action2')
-    get '#/incidents'
+    get '/incidents'
 
     assert_equal 200, response.status
     assert_equal Mime[:json], response.content_type
     assert_equal Incident.count, JSON.parse(response.body).size
+  end
 end

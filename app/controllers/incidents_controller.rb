@@ -7,12 +7,22 @@ class IncidentsController < ApplicationController
   end
 
   def new
+    incident = Incident.new
+    render json: incident, status: 200
   end
 
   def create
+    incident = Incident.create
   end
 
   def update
+    incident = Inciddent.update
+  end
+
+  def edit
+  end
+
+  def show
   end
 
 end
